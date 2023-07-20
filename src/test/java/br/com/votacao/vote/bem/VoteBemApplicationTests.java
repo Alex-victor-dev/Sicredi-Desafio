@@ -1,4 +1,4 @@
-package br.com.votacao.VoteBem;
+package br.com.votacao.vote.bem;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package br.com.votacao.VoteBem;
+package br.com.votacao.vote.bem;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
