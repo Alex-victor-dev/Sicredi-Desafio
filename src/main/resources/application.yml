@@ -1,1 +1,14 @@
+server:
+  servlet:
+    context-path: /vote-bem
 
+spring:
+  data:
+    mongodb:
+      authentication-database: admin
+      uri: ${MONGO_DB_URI:mongodb+srv://alexvictoribeiro:AjfEdzLrjp8djjpK@wakanda.tt3subf.mongodb.net/wakanda?retryWrites=true&w=majority}
+      auto-index-creation: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger
