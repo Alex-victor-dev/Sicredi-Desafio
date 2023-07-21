@@ -15,11 +15,16 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 @Log4j2
 @Service
 @RequiredArgsConstructor
 public class VotoApplicationService implements VotoService {
+
+    private Set<String> cpfsVotantesSessaoAtual = new HashSet<>();
+    private static Set<String> cpfsVotantesGeral = new HashSet<>();
     private final PautaRepository pautaRepository;
     private final VotoRepository votoRepository;
     @Override
@@ -27,9 +32,13 @@ public class VotoApplicationService implements VotoService {
         log.info( "[inicia] VotoApplicationService - registraVoto");
         Pauta pauta = pautaRepository.buscaPaltaPorId(idPauta);
         SessaoVotacao sessaoVotacao = pauta.getSessaoVotacao();
+        if (sessaoVotacao == null) {
+                throw APIException.build( HttpStatus.BAD_REQUEST,"A sessão de votação não foi aberta para esta pauta.");
+            }
         sessaoVotacao.validarSessaoAberta(sessaoVotacao);
+        sessaoVotacao.resetCpfVotante(request.getCpf(), cpfsVotantesSessaoAtual);
         Voto voto = votoRepository.registraVoto(new Voto(request,idPauta));
-        pauta.getSessaoVotacao().adicionarVoto(voto);
+        pauta.getSessaoVotacao().adicionarVoto(voto, cpfsVotantesSessaoAtual, cpfsVotantesGeral);
         pautaRepository.salvaPauta(pauta);
         log.info( "[inicia] VotoApplicationService - registraVoto");
         return VotoResponse.builder()
@@ -38,6 +47,4 @@ public class VotoApplicationService implements VotoService {
                 .dataVoto(voto.getDataVoto())
                 .build();
     }
-
-
     }

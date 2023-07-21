@@ -21,6 +21,7 @@ public class Voto {
     @Id
     private UUID idVoto;
     private UUID idVotoPauta;
+
     @CPF
     private String cpf;
     private OpcaoVoto opcaoVoto;

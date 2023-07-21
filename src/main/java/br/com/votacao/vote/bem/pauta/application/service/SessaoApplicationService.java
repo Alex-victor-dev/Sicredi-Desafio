@@ -9,13 +9,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Log4j2
 @Service
 @RequiredArgsConstructor
 public class SessaoApplicationService implements SessaoService {
-
+    private Set<String> cpfsVotantesSessaoAtual = new HashSet<>();
     private final PautaRepository pautaService;
     private final PautaRepository pautaRepository;
     @Override
@@ -25,6 +27,7 @@ public class SessaoApplicationService implements SessaoService {
         SessaoVotacao sessaoVotacao = pautaRepository.abreSessaoVotacao(new SessaoVotacao(request, idPauta));
         pauta.setSessaoVotacao(sessaoVotacao);
         pautaRepository.salvaPauta(pauta);
+        cpfsVotantesSessaoAtual.clear();
         log.info( "[finaliza] SessaoApplicationService - abreSessaoVotacao");
         return SessaoVotacaoResponse.builder()
                 .dataInicio(sessaoVotacao.getDataInicio())

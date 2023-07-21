@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -44,16 +45,29 @@ public class SessaoVotacao {
                 dataInicio.isBefore(now) && dataEncerramento.isAfter(now);
     }
     public void validarSessaoAberta(SessaoVotacao sessaoVotacao) {
-        if (sessaoVotacao == null) {
-            throw APIException.build( HttpStatus.BAD_REQUEST,"A sessão de votação não foi aberta para esta pauta.");
-        }
-
         if (!sessaoVotacao.estaAbertaParaVotacao()) {
             throw APIException.build(HttpStatus.BAD_REQUEST,"A votação para esta pauta já foi encerrada.");
         }
     }
 
-    public void adicionarVoto(Voto voto) {
+    public void adicionarVoto(Voto voto, Set<String> cpfsVotantesSessaoAtual, Set<String> cpfsVotantesGeral) {
+        String cpfEleitor = voto.getCpf();
+
+        if (cpfsVotantesSessaoAtual.contains(cpfEleitor)) {
+            throw APIException.build(HttpStatus.BAD_REQUEST, "Este CPF já votou nesta sessão de votação.");
+        }
+
+        if (cpfsVotantesGeral.contains(cpfEleitor)) {
+            throw APIException.build(HttpStatus.BAD_REQUEST, "Este CPF já votou em uma sessão anterior.");
+        }
+
         votos.add(voto);
+        cpfsVotantesSessaoAtual.add(cpfEleitor);
+        cpfsVotantesGeral.add(cpfEleitor);
+    }
+
+    public void resetCpfVotante(String cpf, Set<String> cpfsVotantesSessaoAtual) {
+        cpfsVotantesSessaoAtual.remove(cpf);
     }
 }
+
