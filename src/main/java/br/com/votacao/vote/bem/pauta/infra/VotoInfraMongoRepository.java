@@ -1,6 +1,6 @@
-package br.com.votacao.vote.bem.voto.infra;
+package br.com.votacao.vote.bem.pauta.infra;
 
-import br.com.votacao.vote.bem.voto.domain.Voto;
+import br.com.votacao.vote.bem.pauta.domain.Voto;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.UUID;

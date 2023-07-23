@@ -1,14 +1,13 @@
 package br.com.votacao.vote.bem.pauta.application.service;
 
-import br.com.votacao.vote.bem.pauta.application.api.PautaDetalhadaResponse;
-import br.com.votacao.vote.bem.pauta.application.api.PautaRequest;
-import br.com.votacao.vote.bem.pauta.application.api.PautaResponse;
+import br.com.votacao.vote.bem.pauta.application.api.pauta.PautaDetalhadaResponse;
+import br.com.votacao.vote.bem.pauta.application.api.pauta.PautaRequest;
+import br.com.votacao.vote.bem.pauta.application.api.pauta.PautaResponse;
 import br.com.votacao.vote.bem.pauta.application.repository.PautaRepository;
 import br.com.votacao.vote.bem.pauta.domain.Pauta;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 

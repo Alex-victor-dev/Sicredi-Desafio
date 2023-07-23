@@ -1,8 +1,7 @@
 package br.com.votacao.vote.bem.pauta.domain;
 
 import br.com.votacao.vote.bem.handler.APIException;
-import br.com.votacao.vote.bem.pauta.application.api.SessaoVotacaoRequest;
-import br.com.votacao.vote.bem.voto.domain.Voto;
+import br.com.votacao.vote.bem.pauta.application.api.sessao.SessaoVotacaoRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

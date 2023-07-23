@@ -1,8 +1,8 @@
 package br.com.votacao.vote.bem.pauta.application.service;
 
-import br.com.votacao.vote.bem.pauta.application.api.PautaDetalhadaResponse;
-import br.com.votacao.vote.bem.pauta.application.api.PautaRequest;
-import br.com.votacao.vote.bem.pauta.application.api.PautaResponse;
+import br.com.votacao.vote.bem.pauta.application.api.pauta.PautaDetalhadaResponse;
+import br.com.votacao.vote.bem.pauta.application.api.pauta.PautaRequest;
+import br.com.votacao.vote.bem.pauta.application.api.pauta.PautaResponse;
 
 import java.util.UUID;
 

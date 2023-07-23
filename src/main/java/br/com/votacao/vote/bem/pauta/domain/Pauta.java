@@ -1,7 +1,6 @@
 package br.com.votacao.vote.bem.pauta.domain;
 
-import br.com.votacao.vote.bem.pauta.application.api.PautaRequest;
-import br.com.votacao.vote.bem.voto.domain.Voto;
+import br.com.votacao.vote.bem.pauta.application.api.pauta.PautaRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

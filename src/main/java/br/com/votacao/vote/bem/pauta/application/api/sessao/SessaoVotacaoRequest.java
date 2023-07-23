@@ -1,4 +1,4 @@
-package br.com.votacao.vote.bem.pauta.application.api;
+package br.com.votacao.vote.bem.pauta.application.api.sessao;
 
 import lombok.Data;
 

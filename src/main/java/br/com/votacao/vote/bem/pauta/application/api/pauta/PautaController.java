@@ -1,4 +1,4 @@
-package br.com.votacao.vote.bem.pauta.application.api;
+package br.com.votacao.vote.bem.pauta.application.api.pauta;
 
 import br.com.votacao.vote.bem.pauta.application.service.PautaService;
 import lombok.RequiredArgsConstructor;

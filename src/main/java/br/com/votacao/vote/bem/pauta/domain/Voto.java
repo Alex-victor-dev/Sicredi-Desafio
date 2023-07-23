@@ -1,6 +1,6 @@
-package br.com.votacao.vote.bem.voto.domain;
+package br.com.votacao.vote.bem.pauta.domain;
 
-import br.com.votacao.vote.bem.voto.application.api.VotoRequest;
+import br.com.votacao.vote.bem.pauta.application.api.voto.VotoRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,9 +8,7 @@ import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.UUID;
 
 @Document("votos")

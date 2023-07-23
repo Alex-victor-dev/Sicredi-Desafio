@@ -1,7 +1,7 @@
-package br.com.votacao.vote.bem.voto.infra;
+package br.com.votacao.vote.bem.pauta.infra;
 
-import br.com.votacao.vote.bem.voto.application.repository.VotoRepository;
-import br.com.votacao.vote.bem.voto.domain.Voto;
+import br.com.votacao.vote.bem.pauta.application.repository.VotoRepository;
+import br.com.votacao.vote.bem.pauta.domain.Voto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Repository;

@@ -1,6 +1,6 @@
-package br.com.votacao.vote.bem.voto.application.api;
+package br.com.votacao.vote.bem.pauta.application.api.voto;
 
-import br.com.votacao.vote.bem.voto.application.service.VotoService;
+import br.com.votacao.vote.bem.pauta.application.service.VotoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RestController;

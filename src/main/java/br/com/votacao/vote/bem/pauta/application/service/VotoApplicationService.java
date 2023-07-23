@@ -1,15 +1,13 @@
-package br.com.votacao.vote.bem.voto.application.service;
+package br.com.votacao.vote.bem.pauta.application.service;
 
 import br.com.votacao.vote.bem.handler.APIException;
 import br.com.votacao.vote.bem.pauta.application.repository.PautaRepository;
-import br.com.votacao.vote.bem.pauta.application.service.PautaService;
-import br.com.votacao.vote.bem.pauta.application.service.SessaoService;
 import br.com.votacao.vote.bem.pauta.domain.Pauta;
 import br.com.votacao.vote.bem.pauta.domain.SessaoVotacao;
-import br.com.votacao.vote.bem.voto.application.api.VotoRequest;
-import br.com.votacao.vote.bem.voto.application.api.VotoResponse;
-import br.com.votacao.vote.bem.voto.application.repository.VotoRepository;
-import br.com.votacao.vote.bem.voto.domain.Voto;
+import br.com.votacao.vote.bem.pauta.application.api.voto.VotoRequest;
+import br.com.votacao.vote.bem.pauta.application.api.voto.VotoResponse;
+import br.com.votacao.vote.bem.pauta.application.repository.VotoRepository;
+import br.com.votacao.vote.bem.pauta.domain.Voto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
