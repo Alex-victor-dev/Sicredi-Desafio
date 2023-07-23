@@ -5,5 +5,5 @@ public enum StatusSessaoVotacao {
     FECHADA,
     PENDENTE,
     CANCELADA,
-    PAUSADA
+    PAUSADA;
 }

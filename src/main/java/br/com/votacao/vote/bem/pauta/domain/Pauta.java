@@ -2,6 +2,7 @@ package br.com.votacao.vote.bem.pauta.domain;
 
 import br.com.votacao.vote.bem.pauta.application.api.pauta.PautaRequest;
 import br.com.votacao.vote.bem.pauta.application.api.sessao.SessaoVotacaoRequest;
+import br.com.votacao.vote.bem.pauta.application.api.voto.VotoRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,5 +36,8 @@ public class Pauta {
     }
     public void abreSessaoVotacao(SessaoVotacaoRequest sessaoVotacaoRequest) {
         this.sessaoVotacao.iniciaVotacao(sessaoVotacaoRequest);
+    }
+    public Voto adicionaVoto(VotoRequest votoRequest) {
+        return this.sessaoVotacao.adicionarVoto(votoRequest);
     }
 }

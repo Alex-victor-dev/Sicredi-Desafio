@@ -11,10 +11,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Voto {
     private OpcaoVoto opcaoVoto;
-    private LocalDateTime dataVoto;
+    private LocalDateTime momento;
 
     public Voto(VotoRequest request) {
-        this.dataVoto = LocalDateTime.now();
+        this.momento = LocalDateTime.now();
         this.opcaoVoto = request.getOpcaoVoto();
     }
 

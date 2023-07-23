@@ -20,29 +20,15 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class VotoApplicationService implements VotoService {
-
-    private Set<String> cpfsVotantesSessaoAtual = new HashSet<>();
-    private static Set<String> cpfsVotantesGeral = new HashSet<>();
     private final PautaRepository pautaRepository;
-    private final VotoRepository votoRepository;
+
     @Override
-    public VotoResponse registraVoto(UUID idPauta, VotoRequest request) {
-        log.info( "[inicia] VotoApplicationService - registraVoto");
-        Pauta pauta = pautaRepository.buscaPaltaPorId(idPauta);
-        SessaoVotacao sessaoVotacao = pauta.getSessaoVotacao();
-        if (sessaoVotacao == null) {
-                throw APIException.build( HttpStatus.BAD_REQUEST,"A sessão de votação não foi aberta para esta pauta.");
-            }
-        sessaoVotacao.validarSessaoAberta(sessaoVotacao);
-        sessaoVotacao.resetCpfVotante(request.getCpf(), cpfsVotantesSessaoAtual);
-        Voto voto = votoRepository.registraVoto(new Voto(request,idPauta));
-        pauta.getSessaoVotacao().adicionarVoto(voto, cpfsVotantesSessaoAtual, cpfsVotantesGeral);
-        pautaRepository.salvaPauta(pauta);
-        log.info( "[inicia] VotoApplicationService - registraVoto");
-        return VotoResponse.builder()
-                .idVoto(voto.getIdVoto())
-                .opcaoVoto(voto.getOpcaoVoto())
-                .dataVoto(voto.getDataVoto())
-                .build();
+    public VotoResponse registraVoto(UUID idPauta, VotoRequest votoRequest) {
+        log.info( "[inicia] VotoApplicationService - registraVoto" );
+        Pauta pauta = pautaRepository.buscaPaltaPorId( idPauta );
+        Voto voto = pauta.adicionaVoto(votoRequest);
+        pautaRepository.salvaPauta( pauta );
+        log.info( "[inicia] VotoApplicationService - registraVoto" );
+        return new VotoResponse( idPauta, votoRequest.getCpf(), voto );
     }
-    }
+}
