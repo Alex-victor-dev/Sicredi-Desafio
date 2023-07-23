@@ -11,5 +11,5 @@ public interface SessaoAPI {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    SessaoVotacaoResponse abreSessaoVotacao(@PathVariable UUID idPauta, @RequestBody SessaoVotacaoRequest request);
+    SessaoVotacaoResponse abreSessaoVotacao(@PathVariable UUID idPauta, @RequestBody SessaoVotacaoRequest sessaoVotacaoRequest);
 }

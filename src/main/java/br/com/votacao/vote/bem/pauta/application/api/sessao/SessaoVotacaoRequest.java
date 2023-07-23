@@ -1,8 +1,13 @@
 package br.com.votacao.vote.bem.pauta.application.api.sessao;
 
-import lombok.Data;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Data
+import java.time.Duration;
+
+@Getter
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
 public class SessaoVotacaoRequest {
-    private int duracao;
+    private Duration duracao;
 }

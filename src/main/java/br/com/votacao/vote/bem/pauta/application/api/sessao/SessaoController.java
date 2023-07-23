@@ -11,12 +11,11 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 public class SessaoController implements SessaoAPI {
-
     private final SessaoService sessaoService;
     @Override
-    public SessaoVotacaoResponse abreSessaoVotacao(UUID idPauta, SessaoVotacaoRequest request) {
+    public SessaoVotacaoResponse abreSessaoVotacao(UUID idPauta, SessaoVotacaoRequest sessaoVotacaoRequest) {
         log.info( "[inicia] SessaoController - abreSessaoVotacao");
-        SessaoVotacaoResponse sessaoVotacaoResponse = sessaoService.abreSessaoVotacao(idPauta, request);
+        SessaoVotacaoResponse sessaoVotacaoResponse = sessaoService.abreSessaoVotacao(idPauta, sessaoVotacaoRequest);
         log.info( "[finaliza] SessaoController - abreSessaoVotacao");
         return sessaoVotacaoResponse;
     }

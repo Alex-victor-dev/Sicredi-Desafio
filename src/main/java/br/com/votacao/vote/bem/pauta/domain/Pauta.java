@@ -1,22 +1,19 @@
 package br.com.votacao.vote.bem.pauta.domain;
 
 import br.com.votacao.vote.bem.pauta.application.api.pauta.PautaRequest;
+import br.com.votacao.vote.bem.pauta.application.api.sessao.SessaoVotacaoRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Document(collection = "pautas")
 @Getter
-@Setter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Pauta {
 
@@ -28,13 +25,15 @@ public class Pauta {
     @NotBlank(message = "A descrição não pode estar em branco.")
     @Size(max = 500, message = "A descrição deve ter no máximo {max} caracteres.")
     private String descricao;
-    private List<Voto> votos = new ArrayList<>();
     private SessaoVotacao sessaoVotacao;
 
     public Pauta(PautaRequest request) {
         this.idPauta = UUID.randomUUID();
         this.titulo = request.getTitulo();
         this.descricao = request.getDescricao();
+        this.sessaoVotacao = new SessaoVotacao();
     }
-
+    public void abreSessaoVotacao(SessaoVotacaoRequest sessaoVotacaoRequest) {
+        this.sessaoVotacao.iniciaVotacao(sessaoVotacaoRequest);
+    }
 }
