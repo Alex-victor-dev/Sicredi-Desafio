@@ -1,8 +1,10 @@
 package br.com.votacao.vote.bem.pauta.domain;
 
+import br.com.votacao.vote.bem.config.DurationDeserializer;
 import br.com.votacao.vote.bem.handler.APIException;
 import br.com.votacao.vote.bem.pauta.application.api.sessao.SessaoVotacaoRequest;
 import br.com.votacao.vote.bem.pauta.application.api.voto.VotoRequest;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
@@ -14,6 +16,7 @@ import java.util.Optional;
 
 @Getter
 public class SessaoVotacao {
+    @JsonDeserialize(using = DurationDeserializer.class)
     private Duration duracao;
     private LocalDateTime inicio;
     private LocalDateTime fim;
