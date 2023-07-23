@@ -28,10 +28,10 @@ public class Pauta {
     private String descricao;
     private SessaoVotacao sessaoVotacao;
 
-    public Pauta(PautaRequest request) {
+    public Pauta(PautaRequest pautaRequest) {
         this.idPauta = UUID.randomUUID();
-        this.titulo = request.getTitulo();
-        this.descricao = request.getDescricao();
+        this.titulo = pautaRequest.getTitulo();
+        this.descricao = pautaRequest.getDescricao();
         this.sessaoVotacao = new SessaoVotacao();
     }
     public void abreSessaoVotacao(SessaoVotacaoRequest sessaoVotacaoRequest) {

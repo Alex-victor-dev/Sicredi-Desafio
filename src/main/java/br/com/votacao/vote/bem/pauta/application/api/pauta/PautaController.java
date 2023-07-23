@@ -14,9 +14,9 @@ public class PautaController implements PautaAPI {
     private final PautaService pautaService;
 
     @Override
-    public PautaResponse criaPauta(PautaRequest request) {
+    public PautaResponse criaPauta(PautaRequest pautaRequest) {
         log.info( "[inicia] PautaController - criaPauta");
-        PautaResponse pauta = pautaService.criaPauta(request);
+        PautaResponse pauta = pautaService.criaPauta( pautaRequest );
         log.info( "[finaliza] PautaController - criaPauta");
         return pauta;
     }

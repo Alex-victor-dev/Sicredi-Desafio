@@ -7,7 +7,7 @@ import br.com.votacao.vote.bem.pauta.application.api.pauta.PautaResponse;
 import java.util.UUID;
 
 public interface PautaService {
-    PautaResponse criaPauta(PautaRequest request);
+    PautaResponse criaPauta(PautaRequest pautaRequest);
 
     PautaDetalhadaResponse buscaPaltaPorId(UUID idPauta);
 }

@@ -18,9 +18,9 @@ public class PautaApplicationService implements PautaService {
     private final PautaRepository pautaRepository;
 
     @Override
-    public PautaResponse criaPauta(PautaRequest request) {
+    public PautaResponse criaPauta(PautaRequest pautaRequest) {
         log.info( "[inicia] PautaApplicationService - criaPauta");
-        Pauta pauta = pautaRepository.salvaPauta(new Pauta(request));
+        Pauta pauta = pautaRepository.salvaPauta(new Pauta(pautaRequest));
         log.info( "[finaliza] PautaApplicationService - criaPauta");
         return PautaResponse.builder()
                 .idPauta(pauta.getIdPauta())
