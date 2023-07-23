@@ -8,6 +8,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Log4j2
@@ -33,5 +34,20 @@ public class PautaInfraRepository implements PautaRepository {
         log.info( "[finaliza] PautaInfraRepository - buscaPaltaPorId");
         return pauta;
     }
+    @Override
+    public List<Pauta> buscarPautasAbertas() {
+        log.info("[inicia] PautaInfraRepository - buscarPautasAbertas");
+        List<Pauta> pautasAbertas = this.pautaInfraMongoRepository.buscarPautasAbertas();
+        log.info("[finaliza] PautaInfraRepository - buscarPautasAbertas");
+        return pautasAbertas;
     }
+
+    @Override
+    public void salvaPautas(List<Pauta> pautas) {
+        log.info("[start] PautaInfraRepository - salvaPautas");
+        this.pautaInfraMongoRepository.saveAll(pautas);
+        log.info("[finish] PautaInfraRepository - salvaPautas");
+    }
+}
+
 

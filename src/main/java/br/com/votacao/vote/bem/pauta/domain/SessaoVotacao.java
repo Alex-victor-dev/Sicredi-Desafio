@@ -36,15 +36,6 @@ public class SessaoVotacao {
         this.status = StatusSessaoVotacao.ABERTA;
     }
 
-    private void atualizaStatus() {
-        if (this.status == StatusSessaoVotacao.ABERTA) {
-            LocalDateTime agora = LocalDateTime.now();
-            if (agora.isAfter( fim )) {
-                status = StatusSessaoVotacao.FECHADA;
-            }
-        }
-    }
-
     void validaSessaoAberta() {
         atualizaStatus();
         if (status.equals( StatusSessaoVotacao.PENDENTE )) {
@@ -66,6 +57,16 @@ public class SessaoVotacao {
         if (this.votos.containsKey( votoRequest.getCpf() )) {
             throw APIException.build( HttpStatus.BAD_REQUEST, "Este CPF já votou nesta sessão de votação." );
         }
+    }
+    Boolean atualizaStatus() {
+        if(this.status == StatusSessaoVotacao.ABERTA){
+            LocalDateTime agora = LocalDateTime.now();
+            if (agora.isAfter(fim)) {
+                status = StatusSessaoVotacao.FECHADA;
+                return Boolean.TRUE;
+            }
+        }
+        return Boolean.FALSE;
     }
 }
 

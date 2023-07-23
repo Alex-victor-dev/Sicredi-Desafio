@@ -34,10 +34,18 @@ public class Pauta {
         this.descricao = pautaRequest.getDescricao();
         this.sessaoVotacao = new SessaoVotacao();
     }
+
     public void abreSessaoVotacao(SessaoVotacaoRequest sessaoVotacaoRequest) {
-        this.sessaoVotacao.iniciaVotacao(sessaoVotacaoRequest);
+        this.sessaoVotacao.iniciaVotacao( sessaoVotacaoRequest );
     }
+
     public Voto adicionaVoto(VotoRequest votoRequest) {
-        return this.sessaoVotacao.adicionarVoto(votoRequest);
+        return this.sessaoVotacao.adicionarVoto( votoRequest );
+    }
+
+    public boolean atualizaStatusSessao() {
+        return this.sessaoVotacao.atualizaStatus();
     }
 }
+
+
