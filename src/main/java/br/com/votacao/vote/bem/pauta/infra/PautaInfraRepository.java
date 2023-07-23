@@ -3,7 +3,6 @@ package br.com.votacao.vote.bem.pauta.infra;
 import br.com.votacao.vote.bem.handler.APIException;
 import br.com.votacao.vote.bem.pauta.application.repository.PautaRepository;
 import br.com.votacao.vote.bem.pauta.domain.Pauta;
-import br.com.votacao.vote.bem.pauta.domain.SessaoVotacao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -17,7 +16,6 @@ import java.util.UUID;
 public class PautaInfraRepository implements PautaRepository {
 
    private final PautaInfraMongoRepository pautaInfraMongoRepository;
-    private final SessaoInfraMongoRepository sessaoInfraMongoRepository;
 
     @Override
     public Pauta salvaPauta(Pauta pauta) {
@@ -35,12 +33,5 @@ public class PautaInfraRepository implements PautaRepository {
         log.info( "[finaliza] PautaInfraRepository - buscaPaltaPorId");
         return pauta;
     }
-
-    @Override
-    public SessaoVotacao abreSessaoVotacao(SessaoVotacao sessaoVotacao) {
-        log.info( "[inicia] PautaInfraRepository - abreSessaoVotacao");
-        SessaoVotacao sessao = sessaoInfraMongoRepository.save(sessaoVotacao);
-        log.info( "[inicia] PautaInfraRepository - abreSessaoVotacao");
-        return sessao;
     }
-}
+
