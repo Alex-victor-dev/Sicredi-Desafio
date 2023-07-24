@@ -41,22 +41,20 @@ class PautaTest {
         assertEquals(StatusSessaoVotacao.ABERTA, pauta.getSessaoVotacao().getStatus());
     }
 
+    @Test
     void testAdicionaVoto() {
-        // Create a mock for SessaoVotacao
-        SessaoVotacao sessaoVotacao = mock(SessaoVotacao.class);
-        when(sessaoVotacao.atualizaStatus()).thenReturn(true);
+        PautaRequest pautaRequest = new PautaRequest("Título da Pauta", "Descrição da Pauta");
+        Pauta pauta = new Pauta(pautaRequest);
 
-        // Create a mock for VotoRequest
-        VotoRequest votoRequest = mock(VotoRequest.class);
-        when(votoRequest.getCpf()).thenReturn("07764268500");
-        // You may need to provide other necessary arguments for the VotoRequest mock
+        SessaoVotacaoRequest sessaoRequest = new SessaoVotacaoRequest( Duration.ofMinutes(5));
+        pauta.abreSessaoVotacao(sessaoRequest);
 
-        // Perform the test
+        VotoRequest votoRequest = new VotoRequest("07764268500", OpcaoVoto.SIM);
         Voto voto = pauta.adicionaVoto(votoRequest);
 
-        // Verify that the vote is added successfully
         assertNotNull(voto);
-        // You can add further assertions here to check if the vote is added correctly in the votos map.
+        assertEquals("07764268500", voto.getCpf());
+        assertEquals(OpcaoVoto.SIM, voto.getOpcaoVoto());
     }
 
     @Test
