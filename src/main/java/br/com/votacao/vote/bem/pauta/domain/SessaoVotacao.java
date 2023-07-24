@@ -68,5 +68,9 @@ public class SessaoVotacao {
         }
         return Boolean.FALSE;
     }
+
+    public void setVotos(Map<String, Voto> votos) {
+        this.votos = votos;
+    }
 }
 
