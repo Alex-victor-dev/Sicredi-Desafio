@@ -4,6 +4,7 @@ import br.com.votacao.vote.bem.pauta.application.api.pauta.PautaRequest;
 import br.com.votacao.vote.bem.pauta.application.api.sessao.SessaoVotacaoRequest;
 import br.com.votacao.vote.bem.pauta.application.api.voto.VotoRequest;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
