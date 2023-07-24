@@ -1,16 +1,19 @@
 package br.com.votacao.vote.bem.pauta.application.service;
+
+
 import br.com.votacao.vote.bem.pauta.application.api.pauta.PautaDetalhadaResponse;
 import br.com.votacao.vote.bem.pauta.application.api.pauta.PautaRequest;
 import br.com.votacao.vote.bem.pauta.application.api.pauta.PautaResponse;
 import br.com.votacao.vote.bem.pauta.application.repository.PautaRepository;
 import br.com.votacao.vote.bem.pauta.domain.Pauta;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -28,11 +31,6 @@ class PautaApplicationServiceTest {
 
     @Captor
     private ArgumentCaptor<Pauta> pautaCaptor;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
 
     @Test
     void testCriaPauta() {
