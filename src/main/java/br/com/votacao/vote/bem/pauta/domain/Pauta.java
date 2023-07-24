@@ -48,6 +48,9 @@ public class Pauta {
         return this.sessaoVotacao.atualizaStatus();
     }
 
+    public void setIdPauta(UUID generatedId) {
+        this.idPauta = generatedId;
+    }
 }
 
 
