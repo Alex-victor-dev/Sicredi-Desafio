@@ -1,5 +1,4 @@
 package br.com.votacao.vote.bem.pauta.application.service;
-
 import br.com.votacao.vote.bem.pauta.application.api.pauta.PautaDetalhadaResponse;
 import br.com.votacao.vote.bem.pauta.application.api.pauta.PautaRequest;
 import br.com.votacao.vote.bem.pauta.application.api.pauta.PautaResponse;
@@ -7,14 +6,18 @@ import br.com.votacao.vote.bem.pauta.application.repository.PautaRepository;
 import br.com.votacao.vote.bem.pauta.domain.Pauta;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class PautaApplicationServiceTest {
 
     @Mock
@@ -53,11 +56,14 @@ class PautaApplicationServiceTest {
         assertNotNull(capturedPauta);
         assertNotNull(capturedPauta.getIdPauta());
     }
+
     @Test
     void testBuscaPautaPorId() {
         // Prepare test data
         UUID idPauta = UUID.randomUUID();
         Pauta pauta = new Pauta(new PautaRequest("Título da Pauta", "Descrição da Pauta"));
+
+        // Configurar comportamento do mock para retornar a pauta quando buscaPaltaPorId() é chamado
         when(pautaRepository.buscaPaltaPorId(idPauta)).thenReturn(pauta);
 
         // Call the service method
@@ -71,4 +77,3 @@ class PautaApplicationServiceTest {
         verify(pautaRepository, times(1)).buscaPaltaPorId(idPauta);
     }
 }
-
