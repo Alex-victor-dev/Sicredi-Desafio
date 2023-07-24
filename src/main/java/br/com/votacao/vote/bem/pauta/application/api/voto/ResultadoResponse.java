@@ -11,6 +11,7 @@ import java.util.Map;
 public class ResultadoResponse {
     private long votosSim;
     private long votosNao;
+    private long totalDeVotos;
 
     public ResultadoResponse(SessaoVotacao sessaoVotacao) {
         Map<String, Voto> votos = sessaoVotacao.getVotos();
@@ -22,6 +23,8 @@ public class ResultadoResponse {
         this.votosNao = votos.values().stream()
                 .filter( voto -> voto.getOpcaoVoto() == OpcaoVoto.NAO )
                 .count();
+
+        this.totalDeVotos = votosSim+votosNao;
 
     }
 }
