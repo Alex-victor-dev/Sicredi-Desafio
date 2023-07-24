@@ -1,5 +1,6 @@
 package br.com.votacao.vote.bem.pauta.application.service;
 
+import br.com.votacao.vote.bem.pauta.application.api.voto.ResultadoResponse;
 import br.com.votacao.vote.bem.pauta.application.api.voto.VotoRequest;
 import br.com.votacao.vote.bem.pauta.application.api.voto.VotoResponse;
 import br.com.votacao.vote.bem.pauta.application.repository.PautaRepository;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 @Log4j2
 @Service
@@ -24,5 +27,14 @@ public class VotoApplicationService implements VotoService {
         pautaRepository.salvaPauta( pauta );
         log.info( "[inicia] VotoApplicationService - registraVoto" );
         return new VotoResponse( idPauta, votoRequest.getCpf(), voto );
+    }
+
+    @Override
+    public ResultadoResponse calculaResultado(UUID idPauta) {
+        log.info( "[inicia] VotoApplicationService - calculaResultado" );
+        Pauta pauta = pautaRepository.buscaPaltaPorId(idPauta);
+        Map<String, Voto> votos = pauta.getSessaoVotacao().getVotos();
+        log.info( "[finaliza] VotoApplicationService - calculaResultado" );
+        return new ResultadoResponse(pauta.getSessaoVotacao());
     }
 }

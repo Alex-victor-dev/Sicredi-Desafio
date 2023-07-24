@@ -18,4 +18,5 @@ public class Voto {
         this.opcaoVoto = request.getOpcaoVoto();
     }
 
+
 }
