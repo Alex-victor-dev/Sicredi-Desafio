@@ -1,4 +1,5 @@
 package br.com.votacao.vote.bem.config;
+
 import feign.Client;
 import feign.Logger;
 import feign.Request;
@@ -11,6 +12,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import java.security.cert.CertificateException;
