@@ -18,7 +18,7 @@ import javax.net.ssl.SSLSocketFactory;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 @Configuration
-@EnableFeignClients(basePackages = { "academy.wakanda.indicadorfilmes" })
+@EnableFeignClients(basePackages = { "br.com.votacao.vote.bem" })
 @EnableDiscoveryClient
 public class FeignConfig {
     @Value("${feign.connectTimeout:30000}")
