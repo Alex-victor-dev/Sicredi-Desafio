@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "userinfo", url = "https://user-info.herokuapp.com")
 public interface ExternalServiceClient {
 
-    @GetMapping("/users/{cpf}")
+    @GetMapping("/users/%s")
     VoterStatusResponse verificaCpfVotante(@RequestBody String cpf);
 }
