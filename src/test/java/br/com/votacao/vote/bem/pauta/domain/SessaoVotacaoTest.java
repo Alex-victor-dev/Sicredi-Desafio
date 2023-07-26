@@ -3,6 +3,7 @@ package br.com.votacao.vote.bem.pauta.domain;
 import br.com.votacao.vote.bem.handler.APIException;
 import br.com.votacao.vote.bem.pauta.application.api.sessao.SessaoVotacaoRequest;
 import br.com.votacao.vote.bem.pauta.application.api.voto.VotoRequest;
+import br.com.votacao.vote.bem.pauta.application.service.ResultadoSessaoPublicador;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,44 +25,44 @@ public class SessaoVotacaoTest {
     }
 
     @Test
-    public void testIniciaVotacao() {
+    public void testIniciaVotacao(ResultadoSessaoPublicador resultadoSessaoPublicador) {
         SessaoVotacaoRequest request = new SessaoVotacaoRequest(Duration.ofMinutes(5));
 
-        sessaoVotacao.iniciaVotacao(request);
+        sessaoVotacao.iniciaVotacao(request, resultadoSessaoPublicador);
 
         assertEquals(StatusSessaoVotacao.ABERTA, sessaoVotacao.getStatus());
     }
 
     @Test
-    public void testAdicionarVoto() {
+    public void testAdicionarVoto(ResultadoSessaoPublicador resultadoSessaoPublicador) {
         SessaoVotacaoRequest request = new SessaoVotacaoRequest(Duration.ofMinutes(5));
 
-        sessaoVotacao.iniciaVotacao(request);
+        sessaoVotacao.iniciaVotacao(request, resultadoSessaoPublicador);
 
         VotoRequest votoRequest = new VotoRequest("07764268500",OpcaoVoto.SIM);
-        assertNotNull(sessaoVotacao.adicionarVoto(votoRequest));
+        assertNotNull(sessaoVotacao.adicionarVoto(votoRequest, resultadoSessaoPublicador));
     }
 
     @Test
-    public void testValidaSessaoAbertaErro() {
-        assertThrows(APIException.class, () -> sessaoVotacao.validaSessaoAberta());
+    public void testValidaSessaoAbertaErro(ResultadoSessaoPublicador resultadoSessaoPublicador) {
+        assertThrows(APIException.class, () -> sessaoVotacao.validaSessaoAberta(resultadoSessaoPublicador));
     }
 
     @Test
-    public void testAtualizaStatus() {
-        assertFalse(sessaoVotacao.atualizaStatus());
+    public void testAtualizaStatus(ResultadoSessaoPublicador resultadoSessaoPublicador) {
+        assertFalse(sessaoVotacao.atualizaStatus(resultadoSessaoPublicador));
     }
 
     @Test
-    public void testValidaVotoErro() {
+    public void testValidaVotoErro(ResultadoSessaoPublicador resultadoSessaoPublicador) {
         SessaoVotacaoRequest request = new SessaoVotacaoRequest(Duration.ofMinutes(5));
 
-        sessaoVotacao.iniciaVotacao(request);
+        sessaoVotacao.iniciaVotacao(request,resultadoSessaoPublicador);
 
         VotoRequest votoRequest = new VotoRequest("07764268500",OpcaoVoto.NAO);
-        sessaoVotacao.adicionarVoto(votoRequest);
+        sessaoVotacao.adicionarVoto(votoRequest,resultadoSessaoPublicador);
 
-        APIException exception = assertThrows(APIException.class, () -> sessaoVotacao.adicionarVoto(votoRequest));
+        APIException exception = assertThrows(APIException.class, () -> sessaoVotacao.adicionarVoto(votoRequest,resultadoSessaoPublicador));
         assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusException());
         assertEquals("Este CPF já votou nesta sessão de votação.", exception.getMessage());
     }
@@ -74,10 +75,10 @@ public class SessaoVotacaoTest {
     }
 
     @Test
-    public void testValidaSessaoAbertaFechada() throws InterruptedException {
+    public void testValidaSessaoAbertaFechada(ResultadoSessaoPublicador resultadoSessaoPublicador) throws InterruptedException {
         SessaoVotacaoRequest request = new SessaoVotacaoRequest(Duration.ofSeconds(1));
 
-        sessaoVotacao.iniciaVotacao(request);
+        sessaoVotacao.iniciaVotacao(request,resultadoSessaoPublicador);
 
         // aguarda o tempo da sessão expirar
         Thread.sleep(2000);

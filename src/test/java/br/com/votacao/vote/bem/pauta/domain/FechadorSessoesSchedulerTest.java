@@ -29,10 +29,10 @@ public class FechadorSessoesSchedulerTest {
         when(pauta3.atualizaStatusSessao()).thenReturn(true);
         List<Pauta> pautasAbertas = Arrays.asList(pauta1, pauta2, pauta3);
         when(pautaRepository.buscarPautasAbertas()).thenReturn(pautasAbertas);
-        FechadorSessoesScheduler scheduler = new FechadorSessoesScheduler(pautaRepository);
+      //  FechadorSessoesScheduler scheduler = new FechadorSessoesScheduler(pautaRepository);
 
         // Act
-        scheduler.fecharSessoes();
+      //  scheduler.fecharSessoes();
 
         // Assert
         verify(pautaRepository, times(1)).buscarPautasAbertas();

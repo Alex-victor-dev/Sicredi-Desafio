@@ -30,8 +30,8 @@ public class SessaoVotacao {
     }
 
 
-    void iniciaVotacao(SessaoVotacaoRequest request) {
-        podeAbrirSessao();
+    void iniciaVotacao(SessaoVotacaoRequest request, ResultadoSessaoPublicador resultadoSessaoPublicador) {
+        podeAbrirSessao(resultadoSessaoPublicador);
         this.duracao = Optional.ofNullable(request.getDuracao()).orElse(Duration.ofMinutes(1));
         this.inicio = LocalDateTime.now();
         this.fim = inicio.plus(duracao);
@@ -39,8 +39,8 @@ public class SessaoVotacao {
         this.status = StatusSessaoVotacao.ABERTA;
     }
 
-    private void podeAbrirSessao() {
-        atualizaStatus();
+    private void podeAbrirSessao(ResultadoSessaoPublicador resultadoSessaoPublicador) {
+        atualizaStatus(resultadoSessaoPublicador);
         if (status.equals(StatusSessaoVotacao.ABERTA)) {
             throw APIException.build(HttpStatus.BAD_REQUEST, "A sessão de votação já foi aberta para esta pauta.");
         } else if (status.equals(StatusSessaoVotacao.FECHADA)) {
@@ -48,8 +48,8 @@ public class SessaoVotacao {
         }
     }
 
-    void validaSessaoAberta() {
-        atualizaStatus();
+    void validaSessaoAberta(ResultadoSessaoPublicador resultadoSessaoPublicador) {
+        atualizaStatus(resultadoSessaoPublicador);
         if (status.equals( StatusSessaoVotacao.PENDENTE )) {
             throw APIException.build( HttpStatus.BAD_REQUEST, "A sessão de votação não foi aberta para esta pauta." );
         } else if (status.equals( StatusSessaoVotacao.FECHADA )) {
@@ -57,8 +57,8 @@ public class SessaoVotacao {
         }
     }
 
-    Voto adicionarVoto(VotoRequest votoRequest) {
-        validaSessaoAberta();
+    Voto adicionarVoto(VotoRequest votoRequest, ResultadoSessaoPublicador resultadoSessaoPublicador) {
+        validaSessaoAberta(resultadoSessaoPublicador);
         validaVoto( votoRequest );
         Voto voto = new Voto( votoRequest );
         this.votos.put( votoRequest.getCpf(), voto );

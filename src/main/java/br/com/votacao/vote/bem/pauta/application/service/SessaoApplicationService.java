@@ -17,12 +17,13 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class SessaoApplicationService implements SessaoService {
+    private final ResultadoSessaoPublicador resultadoSessaoPublicador;
     private final PautaRepository pautaRepository;
     @Override
     public SessaoVotacaoResponse abreSessaoVotacao(UUID idPauta, SessaoVotacaoRequest sessaoVotacaoRequest) {
         log.info( "[inicia] SessaoApplicationService - abreSessaoVotacao");
         Pauta pauta = pautaRepository.buscaPaltaPorId(idPauta);
-        pauta.abreSessaoVotacao(sessaoVotacaoRequest);
+        pauta.abreSessaoVotacao(sessaoVotacaoRequest, resultadoSessaoPublicador);
         pautaRepository.salvaPauta(pauta);
         log.info( "[finaliza] SessaoApplicationService - abreSessaoVotacao");
         return new SessaoVotacaoResponse(pauta.getSessaoVotacao(), idPauta);

@@ -17,13 +17,14 @@ import java.util.UUID;
 public class VotoApplicationService implements VotoService {
     private final PautaRepository pautaRepository;
     private final AssociadoValidador associadoValidador;
+    private final ResultadoSessaoPublicador resultadoSessaoPublicador;
 
     @Override
     public VotoResponse registraVoto(UUID idPauta, VotoRequest votoRequest) {
         log.info( "[inicia] VotoApplicationService - registraVoto" );
         Pauta pauta = pautaRepository.buscaPaltaPorId( idPauta );
         associadoValidador.valida(votoRequest);
-        Voto voto = pauta.adicionaVoto(votoRequest);
+        Voto voto = pauta.adicionaVoto(votoRequest,resultadoSessaoPublicador);
         pautaRepository.salvaPauta( pauta );
         log.info( "[inicia] VotoApplicationService - registraVoto" );
         return new VotoResponse( idPauta, votoRequest.getCpf(), voto );

@@ -3,6 +3,7 @@ package br.com.votacao.vote.bem.pauta.domain;
 import br.com.votacao.vote.bem.pauta.application.api.pauta.PautaRequest;
 import br.com.votacao.vote.bem.pauta.application.api.sessao.SessaoVotacaoRequest;
 import br.com.votacao.vote.bem.pauta.application.api.voto.VotoRequest;
+import br.com.votacao.vote.bem.pauta.application.service.ResultadoSessaoPublicador;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,16 +37,16 @@ public class Pauta {
         this.sessaoVotacao = new SessaoVotacao();
     }
 
-    public void abreSessaoVotacao(SessaoVotacaoRequest sessaoVotacaoRequest) {
-        this.sessaoVotacao.iniciaVotacao( sessaoVotacaoRequest );
+    public void abreSessaoVotacao(SessaoVotacaoRequest sessaoVotacaoRequest, ResultadoSessaoPublicador resultadoSessaoPublicador) {
+        this.sessaoVotacao.iniciaVotacao( sessaoVotacaoRequest, resultadoSessaoPublicador);
     }
 
-    public Voto adicionaVoto(VotoRequest votoRequest) {
-        return this.sessaoVotacao.adicionarVoto( votoRequest );
+    public Voto adicionaVoto(VotoRequest votoRequest, ResultadoSessaoPublicador resultadoSessaoPublicador) {
+        return this.sessaoVotacao.adicionarVoto( votoRequest, resultadoSessaoPublicador);
     }
 
-    public boolean atualizaStatusSessao() {
-        return this.sessaoVotacao.atualizaStatus();
+    public boolean atualizaStatusSessao(ResultadoSessaoPublicador resultadoSessaoPublicador) {
+        return this.sessaoVotacao.atualizaStatus(resultadoSessaoPublicador);
     }
 
     public void setIdPauta(UUID generatedId) {
