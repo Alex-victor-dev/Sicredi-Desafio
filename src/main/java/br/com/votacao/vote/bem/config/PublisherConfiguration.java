@@ -8,7 +8,6 @@ import com.amazonaws.services.sns.AmazonSNSAsync;
 import com.amazonaws.services.sns.AmazonSNSAsyncClientBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.aws.messaging.core.NotificationMessagingTemplate;
 import org.springframework.context.annotation.Bean;
@@ -49,7 +48,6 @@ public class PublisherConfiguration {
     }
 
     @Bean
-    @Autowired
     public NotificationMessagingTemplate notificationMessagingTemplate(AmazonSNS amazonSNS) {
         return new NotificationMessagingTemplate(amazonSNS);
     }
