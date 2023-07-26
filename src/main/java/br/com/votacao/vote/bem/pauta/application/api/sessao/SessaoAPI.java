@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("v1/pauta/{idPauta}/sessoes")
+@RequestMapping("v1/pauta/{idPauta}/sessoes/abertura")
 public interface SessaoAPI {
 
     @PostMapping
