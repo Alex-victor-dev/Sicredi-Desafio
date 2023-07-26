@@ -23,6 +23,7 @@ public class VotoApplicationService implements VotoService {
     public VotoResponse registraVoto(UUID idPauta, VotoRequest votoRequest) {
         log.info( "[inicia] VotoApplicationService - registraVoto" );
         Pauta pauta = pautaRepository.buscaPaltaPorId( idPauta );
+        associadoValidador.valida(votoRequest);
         Voto voto = pauta.adicionaVoto(votoRequest);
         pautaRepository.salvaPauta( pauta );
         log.info( "[inicia] VotoApplicationService - registraVoto" );
