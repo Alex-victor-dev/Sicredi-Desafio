@@ -29,11 +29,21 @@ public class SessaoVotacao {
 
 
     void iniciaVotacao(SessaoVotacaoRequest request) {
+        podeAbrirSessao();
         this.duracao = Optional.ofNullable(request.getDuracao()).orElse(Duration.ofMinutes(1));
         this.inicio = LocalDateTime.now();
         this.fim = inicio.plus(duracao);
         this.votos = new HashMap<>();
         this.status = StatusSessaoVotacao.ABERTA;
+    }
+
+    private void podeAbrirSessao() {
+        atualizaStatus();
+        if (status.equals(StatusSessaoVotacao.ABERTA)) {
+            throw APIException.build(HttpStatus.BAD_REQUEST, "A sessão de votação já foi aberta para esta pauta.");
+        } else if (status.equals(StatusSessaoVotacao.FECHADA)) {
+            throw APIException.build(HttpStatus.BAD_REQUEST, "A votação para esta pauta já foi encerrada.");
+        }
     }
 
     void validaSessaoAberta() {

@@ -3,11 +3,14 @@ package br.com.votacao.vote.bem.pauta.application.api.voto;
 import br.com.votacao.vote.bem.pauta.domain.OpcaoVoto;
 import br.com.votacao.vote.bem.pauta.domain.SessaoVotacao;
 import br.com.votacao.vote.bem.pauta.domain.Voto;
-import lombok.Value;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
-@Value
+@Getter
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
 public class ResultadoResponse {
     private long votosSim;
     private long votosNao;
