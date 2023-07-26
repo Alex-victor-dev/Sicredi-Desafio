@@ -3,7 +3,9 @@ package br.com.votacao.vote.bem.pauta.domain;
 import br.com.votacao.vote.bem.config.DurationDeserializer;
 import br.com.votacao.vote.bem.handler.APIException;
 import br.com.votacao.vote.bem.pauta.application.api.sessao.SessaoVotacaoRequest;
+import br.com.votacao.vote.bem.pauta.application.api.voto.ResultadoResponse;
 import br.com.votacao.vote.bem.pauta.application.api.voto.VotoRequest;
+import br.com.votacao.vote.bem.pauta.application.service.ResultadoSessaoPublicador;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -57,9 +59,9 @@ public class SessaoVotacao {
 
     Voto adicionarVoto(VotoRequest votoRequest) {
         validaSessaoAberta();
-        validaVoto(votoRequest);
-        Voto voto = new Voto(votoRequest);
-        this.votos.put(votoRequest.getCpf(), voto);
+        validaVoto( votoRequest );
+        Voto voto = new Voto( votoRequest );
+        this.votos.put( votoRequest.getCpf(), voto );
         return voto;
     }
 
@@ -68,15 +70,21 @@ public class SessaoVotacao {
             throw APIException.build( HttpStatus.BAD_REQUEST, "Este CPF já votou nesta sessão de votação." );
         }
     }
-    Boolean atualizaStatus() {
-        if(this.status == StatusSessaoVotacao.ABERTA){
+
+    Boolean atualizaStatus(ResultadoSessaoPublicador resultadoSessaoPublicador) {
+        if (this.status == StatusSessaoVotacao.ABERTA) {
             LocalDateTime agora = LocalDateTime.now();
             if (agora.isAfter(fim)) {
-                status = StatusSessaoVotacao.FECHADA;
+                fechaSessao(resultadoSessaoPublicador);
                 return Boolean.TRUE;
             }
         }
         return Boolean.FALSE;
+    }
+
+    private void fechaSessao(ResultadoSessaoPublicador resultadoSessaoPublicador) {
+        status = StatusSessaoVotacao.FECHADA;
+        resultadoSessaoPublicador.publica(new ResultadoResponse(this));
     }
 
     public void setVotos(Map<String, Voto> votos) {
