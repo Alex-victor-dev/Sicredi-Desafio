@@ -68,8 +68,8 @@ public class SessaoVotacaoTest {
     }
 
     @Test
-    public void testValidaSessaoAbertaPendente() {
-        APIException exception = assertThrows(APIException.class, () -> sessaoVotacao.validaSessaoAberta());
+    public void testValidaSessaoAbertaPendente(ResultadoSessaoPublicador resultadoSessaoPublicador) {
+        APIException exception = assertThrows(APIException.class, () -> sessaoVotacao.validaSessaoAberta(resultadoSessaoPublicador));
         assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusException());
         assertEquals("A sessão de votação não foi aberta para esta pauta.", exception.getMessage());
     }
@@ -83,7 +83,7 @@ public class SessaoVotacaoTest {
         // aguarda o tempo da sessão expirar
         Thread.sleep(2000);
 
-        APIException exception = assertThrows(APIException.class, () -> sessaoVotacao.validaSessaoAberta());
+        APIException exception = assertThrows(APIException.class, () -> sessaoVotacao.validaSessaoAberta(resultadoSessaoPublicador));
         assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusException());
         assertEquals("A votação para esta pauta já foi encerrada.", exception.getMessage());
     }

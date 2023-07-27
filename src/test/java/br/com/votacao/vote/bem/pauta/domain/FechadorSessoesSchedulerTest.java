@@ -1,6 +1,7 @@
 package br.com.votacao.vote.bem.pauta.domain;
 
 import br.com.votacao.vote.bem.pauta.application.repository.PautaRepository;
+import br.com.votacao.vote.bem.pauta.application.service.ResultadoSessaoPublicador;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -22,11 +23,11 @@ public class FechadorSessoesSchedulerTest {
     private Pauta pauta1, pauta2, pauta3;
 
     @Test
-    public void fecharSessoesTest() {
+    public void fecharSessoesTest(ResultadoSessaoPublicador resultadoSessaoPublicador) {
         // Arrange
-        when(pauta1.atualizaStatusSessao()).thenReturn(true);
-        when(pauta2.atualizaStatusSessao()).thenReturn(false);
-        when(pauta3.atualizaStatusSessao()).thenReturn(true);
+        when(pauta1.atualizaStatusSessao(resultadoSessaoPublicador)).thenReturn(true);
+        when(pauta2.atualizaStatusSessao(resultadoSessaoPublicador)).thenReturn(false);
+        when(pauta3.atualizaStatusSessao(resultadoSessaoPublicador)).thenReturn(true);
         List<Pauta> pautasAbertas = Arrays.asList(pauta1, pauta2, pauta3);
         when(pautaRepository.buscarPautasAbertas()).thenReturn(pautasAbertas);
       //  FechadorSessoesScheduler scheduler = new FechadorSessoesScheduler(pautaRepository);
@@ -36,9 +37,9 @@ public class FechadorSessoesSchedulerTest {
 
         // Assert
         verify(pautaRepository, times(1)).buscarPautasAbertas();
-        verify(pauta1, times(1)).atualizaStatusSessao();
-        verify(pauta2, times(1)).atualizaStatusSessao();
-        verify(pauta3, times(1)).atualizaStatusSessao();
+        verify(pauta1, times(1)).atualizaStatusSessao(resultadoSessaoPublicador);
+        verify(pauta2, times(1)).atualizaStatusSessao(resultadoSessaoPublicador);
+        verify(pauta3, times(1)).atualizaStatusSessao(resultadoSessaoPublicador);
         verify(pautaRepository, times(1)).salvaPautas( Arrays.asList(pauta1, pauta3));
     }
 }

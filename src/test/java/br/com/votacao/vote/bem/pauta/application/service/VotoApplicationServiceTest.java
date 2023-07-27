@@ -37,13 +37,13 @@ class VotoApplicationServiceTest {
     private ArgumentCaptor<Pauta> pautaCaptor;
 
     @Test
-    void testRegistraVoto() {
+    void testRegistraVoto(ResultadoSessaoPublicador resultadoSessaoPublicador) {
         // Prepare test data
         UUID idPauta = UUID.randomUUID();
         VotoRequest votoRequest = new VotoRequest("12345678901", OpcaoVoto.SIM);
         Pauta pauta = new Pauta(new PautaRequest("Teste", "DRIVE"));
         pauta.setIdPauta(idPauta);
-        pauta.abreSessaoVotacao(new SessaoVotacaoRequest(Duration.ofMinutes(10)));
+        pauta.abreSessaoVotacao(new SessaoVotacaoRequest(Duration.ofMinutes(10)),resultadoSessaoPublicador);
         when(pautaRepository.buscaPaltaPorId(idPauta)).thenReturn(pauta);
         when(pautaRepository.buscaPaltaPorId(idPauta)).thenReturn(pauta);
         // Call the service method
