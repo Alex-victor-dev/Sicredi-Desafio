@@ -12,3 +12,26 @@ spring:
 springdoc:
   swagger-ui:
     path: /swagger
+
+aws:
+  config:
+    region: ${AWS_SNS_REGION:us-east-1}
+    accesskey: ${AWS_SNS_ACCESS_KEY:teste}
+    secretkey: ${AWS_SNS_SECRET_KEY:teste}
+    resultadoSessaoTopico: ${AWS_CONFIG_RESULTADO_SESSAO_TOPIC:resultado-sessao-topic}
+
+cloud:
+  aws:
+    credentials:
+      accessKey: ${AWS_SNS_ACCESS_KEY:teste}
+      secretKey: ${AWS_SNS_SECRET_KEY:teste}
+    stack: false
+    stack.auto: false
+    region:
+      auto: false
+      static: ${AWS_SNS_REGION:us-east-1}
+      use-default-aws-region-chain: true
+
+app:
+  aws:
+    endpoint-override: http://localhost:4566
