@@ -12,19 +12,23 @@
 ### Download Projeto
 * Clone o projeto na máquina
 * Acesse o diretório do projeto clonado via terminal
-### Invoking Spring Boot server
+
+### Configure AWS CLI profile localstack
+```configure
+aws configure --profile localstack
+AWS Access Key ID [None]: teste
+AWS Secret Access Key [None]: teste
+Default region name [None]: us-east-1
+Default output format [None]: json
+```
+
+### Invoking Spring Boot server Windows
 ```windows
-aws configure
-AWS Access Key ID [****************este]: teste
-AWS Secret Access Key [****************este]: teste
-Default region name [us-east-1]: ur-east-1
-Default output format [http://localhost:4566]: http://localhost:4566
-
-
 docker-compose up
 sh/create-sqs-and-sns--resultado-sessao.bat
 mvn spring-boot:run
 ```
+### Invoking Spring Boot server Linux
 ```linux
 docker-compose up
 sh sh/create-sqs-and-sns--resultado-sessao.sh
