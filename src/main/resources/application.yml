@@ -18,7 +18,7 @@ aws:
     region: ${AWS_SNS_REGION:us-east-1}
     accesskey: ${AWS_SNS_ACCESS_KEY:teste}
     secretkey: ${AWS_SNS_SECRET_KEY:teste}
-    resultadoSessaoTopico: ${AWS_CONFIG_RESULTADO_SESSAO_QUEUE:resultadoSessaoQueue}
+    resultadoSessaoTopico: ${AWS_CONFIG_RESULTADO_SESSAO_TOPIC:resultado-sessao-topic}
 
 cloud:
   aws:
