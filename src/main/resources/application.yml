@@ -31,3 +31,7 @@ cloud:
       auto: false
       static: ${AWS_SNS_REGION:us-east-1}
       use-default-aws-region-chain: true
+
+app:
+  aws:
+    endpoint-override: http://localhost:4566
